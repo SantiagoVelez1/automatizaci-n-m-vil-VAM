@@ -5,12 +5,11 @@ class ProductsPage {
     return $('android=new UiSelector().textContains("Productos")');
   }
 
-  // ⚠️ OJO: sin [1]. Con $$ queremos TODAS las coincidencias.
+  
   get listaAgregarButtons() {
     return $$('//android.widget.TextView[@text="Agregar"]');
   }
 
-  // Spinner / loaders (ajústalo si conoces el id real)
   get posiblesLoaders() {
     return $$('android=new UiSelector().classNameMatches(".*ProgressBar|.*Spinner")');
   }
@@ -26,7 +25,7 @@ class ProductsPage {
 
   /**
    * Espera a que haya al menos `min` productos visibles.
-   * Hace scroll suave por si hay lazy-load.
+   * Hace scroll suave
    */
   async esperarProductosVisibles({ min = 1, timeout = 30000 } = {}) {
     const fin = Date.now() + timeout;
@@ -44,7 +43,7 @@ class ProductsPage {
         if (botones.length >= min) return true;
       }
 
-      // Intenta scroll si la lista es lazy
+      // Intenta scroll 
       await this.scrollForwardSuave();
     }
 
@@ -52,7 +51,6 @@ class ProductsPage {
   }
 
   /**
-   * Scroll con UiScrollable (robusto en Android).
    * Si no hay contenedor scrollable, no falla la prueba.
    */
   async scrollForwardSuave() {

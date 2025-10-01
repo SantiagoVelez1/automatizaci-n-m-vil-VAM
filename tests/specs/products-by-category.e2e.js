@@ -9,9 +9,8 @@ describe('Visualización de productos por categoría', () => {
 
     // 1) Modal obligatorio
     await HomePage.selectBranchMandatory(SUCURSAL);
-    await HomePage.waitModalClosed(); // 👈 esperar que el modal cierre de verdad
-    // (esto ya lo tienes en tu spec actual) :contentReference[oaicite:2]{index=2}
-
+    await HomePage.waitModalClosed(); // 
+    
     // 2) Ya en Home con sucursal aplicada
     await HomePage.esperarHome();
     const okSucursal = await HomePage.verificarSucursalAplicada(SUCURSAL);
@@ -20,7 +19,7 @@ describe('Visualización de productos por categoría', () => {
 
     // 3) Abrir categoría
     await HomePage.abrirCategoria(CATEGORIA);
-    await HomePage.assertModalNotPresent(); // asegura que no reabre modal :contentReference[oaicite:4]{index=4}
+    await HomePage.assertModalNotPresent(); // asegura que no reabre modal
 
     // 4) Esperar y validar productos visibles con scroll y timeout
     const okProductos = await ProductsPage.esperarProductosVisibles({ min: 1, timeout: 30000 });
