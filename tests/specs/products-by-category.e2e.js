@@ -9,19 +9,21 @@ describe('Visualización de productos por categoría', () => {
 
     // 1) Modal obligatorio
     await HomePage.selectBranchMandatory(SUCURSAL);
-    await HomePage.waitModalClosed();
+    await HomePage.waitModalClosed(); // 👈 esperar que el modal cierre de verdad
+    // (esto ya lo tienes en tu spec actual) :contentReference[oaicite:2]{index=2}
 
     // 2) Ya en Home con sucursal aplicada
     await HomePage.esperarHome();
     const okSucursal = await HomePage.verificarSucursalAplicada(SUCURSAL);
     assert.ok(okSucursal, `La sucursal en Home no coincide con: ${SUCURSAL}`);
+    // (métodos existentes) :contentReference[oaicite:3]{index=3}
 
     // 3) Abrir categoría
     await HomePage.abrirCategoria(CATEGORIA);
-    await HomePage.assertModalNotPresent();
+    await HomePage.assertModalNotPresent(); // asegura que no reabre modal :contentReference[oaicite:4]{index=4}
 
-    // 4) Validar productos
-    const hayProductos = await ProductsPage.hayProductosVisibles();
-    assert.ok(hayProductos, `No se encontraron productos visibles en la categoría: ${CATEGORIA}`);
+    // 4) Esperar y validar productos visibles con scroll y timeout
+    const okProductos = await ProductsPage.esperarProductosVisibles({ min: 1, timeout: 30000 });
+    assert.ok(okProductos, `No se encontraron productos visibles en la categoría: ${CATEGORIA}`);
   });
 });
