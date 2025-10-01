@@ -8,7 +8,6 @@ describe('Login', () => {
 
     await LoginPage.login(USER, PASS);
 
-    // REEMPLAZA por un marcador confiable del Home
     const homeMarker = await $('android=new UiSelector().textContains("Elige o busca una sucursal")');
     await homeMarker.waitForDisplayed({ timeout: 20000 });
     assert.ok(await homeMarker.isDisplayed(), 'No se mostró el Home tras login');

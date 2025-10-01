@@ -11,7 +11,6 @@ class LoginPage {
   get inputPassword() { return $('//android.widget.EditText[@text="Contraseña"]'); }
   get btnIngresar()   { return $('android=new UiSelector().textContains("Continuar")'); }
 
-  // 👉 Igual que al inicio, pero ahora con el paso previo "Continuar"
   async login(usuario, pass) {
     // 1) Si aparece "Continuar", tócalo y espera la siguiente vista
     try {
